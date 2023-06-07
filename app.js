@@ -7,13 +7,23 @@ const fetchData = async (query) => {
             s: query,
         }
     });
-    console.log(response.data);
+    return response.data.Search;
 };
 
 const input = document.getElementById("input");
 
-const onInput = event => {
-    fetchData(event.target.value.trim());
+const onInput = async event => {
+    const movies = await fetchData(event.target.value.trim());
+
+    movies.forEach((movie) => {
+        const div = document.createElement("div");
+        div.className = "movie";
+        div.innerHTML = `
+            <img src = "${movie.Poster}" />
+            <h1>${movie.Title}</h1>
+        `;
+        document.getElementById("target").appendChild(div);
+    });
 };
 
-input.addEventListener("input", debounce(onInput, 1000));
+input.addEventListener("input", debounce(onInput, 1000)); 
