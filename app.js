@@ -8,18 +8,24 @@ const fetchData = async (query) => {
         }
     });
     console.log(response.data);
-}
+};
 
 const input = document.getElementById("input");
 
-let timeoutId;
-const onInput = event => {
-    if (timeoutId) {
-        clearTimeout(timeoutId);
-    }
-    timeoutId = setTimeout(() => {
-        fetchData(event.target.value.trim());
-    }, 1000)
-}
+const debounce = (callbackFunc, delay = 1000) => {
+    let timeoutId;
+    return (...args) => {
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(() => {
+            callbackFunc.apply(null, args);
+        }, delay);
+    };
+};
 
-input.addEventListener("input", onInput) 
+const onInput = event => {
+    fetchData(event.target.value.trim());
+};
+
+input.addEventListener("input", debounce(onInput, 1000));
