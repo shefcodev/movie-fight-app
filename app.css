@@ -39,7 +39,7 @@ figure .image img {
 }
 
 .dropdown-item {
-    display: flex;
+    display: flex !important;
     align-items: center;
     height: 60px;
 }

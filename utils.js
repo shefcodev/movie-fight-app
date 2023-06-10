@@ -7,14 +7,14 @@ const debounce = (callbackFunc, delay = 1000) => {
             clearTimeout(timeoutId);
        }
         timeoutId = setTimeout(() => {
-            delMovies(document.querySelectorAll(".movie"));
+            removeMovies(document.querySelectorAll(".movie"));
             callbackFunc.call(null, ...args);
             // callbackFunc.apply(null, args);
         }, delay);
     };
 };
 
-const delMovies = (movieList) => {
+const removeMovies = (movieList) => {
     if (movieList.length) {
         movieList.forEach((movie) => {
             movie.remove();
