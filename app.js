@@ -29,20 +29,38 @@ const resultsWrapper = document.querySelector(".results");
 const input = document.getElementById("input");
 
 const onInput = async event => {
-    const movies = await fetchData(event.target.value.trim());  
+    const movies = await fetchData(event.target.value.trim()); 
+
+    if (!movies.length) {
+        dropdown.classList.remove("is-active");
+        return;
+    }
+
     dropdown.classList.add("is-active");
+    resultsWrapper.innerHTML = ``;
 
     movies.forEach((movie) => {
         const movieOption = document.createElement("a");
-        
+        const imgSRC = (movie.Poster === "N/A") ? "" : movie.Poster;
+
         movieOption.classList.add("movie", "dropdown-item");
         movieOption.innerHTML = `
-            <img src = "${movie.Poster}" />
+            <img src = "${imgSRC}" />
             ${movie.Title}
         `;
-        
+
+        movieOption.addEventListener("click", () => {
+            dropdown.classList.remove("is-active"); 
+            input.value = movie.Title;
+        })
         resultsWrapper.appendChild(movieOption);
     });
 };
 
 input.addEventListener("input", debounce(onInput, 1000));  
+
+document.addEventListener("click", event => {
+    if (!root.contains(event.target)) {
+        dropdown.classList.remove("is-active");
+    }
+})

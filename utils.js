@@ -7,7 +7,7 @@ const debounce = (callbackFunc, delay = 1000) => {
             clearTimeout(timeoutId);
        }
         timeoutId = setTimeout(() => {
-            removeMovies(document.querySelectorAll(".movie"));
+            // removeMovies(document.querySelectorAll(".movie"));
             callbackFunc.call(null, ...args);
             // callbackFunc.apply(null, args);
         }, delay);
