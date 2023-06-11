@@ -52,26 +52,46 @@ const onInput = async event => {
         movieOption.addEventListener("click", () => {
             dropdown.classList.remove("is-active"); 
             input.value = movie.Title;
-            onMovieSelect(movie);
+            const { imdbID: reqId } = movie;
+            onMovieSelect(reqId);
         })
         resultsWrapper.appendChild(movieOption);
     });
 };
-
+ 
 input.addEventListener("input", debounce(onInput, 1000));  
 
 document.addEventListener("click", event => {
     if (!root.contains(event.target)) {
         dropdown.classList.remove("is-active");
-    }
+    } 
 })
 
-const onMovieSelect = async (movie) => {
+const onMovieSelect = async reqId => {
     const response = await axios.get("http://www.omdbapi.com/", {
         params: {
             apikey: "2269a1a6",
-            i: movie.imdbID,
+            i: reqId,
         }
     })
-    console.log(response.data);
+    document.querySelector("#summary").innerHTML = movieTemplate(response.data);
+}
+
+const movieTemplate = movieDetail => {
+    return `
+        <article class = "media">
+            <figure class = "media-left">
+                <p class = "image">
+                    <img src = "${movieDetail.Poster}" />
+                </p>
+            </figure>
+            <div class = "media-content'>
+                <div class = "content'>
+                    <h1>${movieDetail.Title}</h1>
+                    <h4>${movieDetail.Genre}</h4>
+                    <p>${movieDetail.Plot}</p>
+                </div>
+            </div>
+        </article>
+    `;
 }
