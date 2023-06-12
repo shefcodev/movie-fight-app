@@ -61,3 +61,7 @@ h1 {
 h4 {
     font-size: 120% !important;
 }
+
+#summary {
+    margin-top: 0.7em;
+}
