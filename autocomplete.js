@@ -2,7 +2,7 @@
 
 "use strict";
 
-const createAutoComplete = ({ root, }) => {
+const createAutoComplete = ({ root, renderOption, onOptionSelect, inputValue }) => {
     root.innerHTML = `
         <label><b>Search for a Movie</b></label>
         <input class = "input" />
@@ -30,18 +30,14 @@ const createAutoComplete = ({ root, }) => {
 
         movies.forEach((movie) => {
             const movieOption = document.createElement("a");
-            const imgSRC = (movie.Poster === "N/A") ? "" : movie.Poster;
 
             movieOption.classList.add("movie", "dropdown-item"); 
-            movieOption.innerHTML = `
-                <img src = "${imgSRC}" />
-                ${movie.Title}
-            `;
+            movieOption.innerHTML = renderOption(movie);
 
             movieOption.addEventListener("click", () => {
                 dropdown.classList.remove("is-active"); 
-                input.value = movie.Title;
-                onMovieSelect(movie);
+                input.value = inputValue(movie);
+                onOptionSelect(movie);
             })
             resultsWrapper.appendChild(movieOption);
         });
