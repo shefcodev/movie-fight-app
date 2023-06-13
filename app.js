@@ -1,18 +1,5 @@
 // project javascript file;
 
-const fetchData = async (query) => {
-    const response = await axios.get("http://www.omdbapi.com/", {
-        params: {
-            apikey: "2269a1a6",
-            s: query,
-        }
-    });
-    if (response.data.Error) {
-        return [];
-    }
-    return response.data.Search;
-};
-
 createAutoComplete({
     root: document.querySelector(".autocomplete"),
     renderOption(movie) {
@@ -27,6 +14,18 @@ createAutoComplete({
     },
     inputValue(movie) {
         return movie.Title;
+    },
+    async fetchData(query) {
+        const response = await axios.get("http://www.omdbapi.com/", {
+            params: {
+                apikey: "2269a1a6",
+                s: query,
+            }
+        });
+        if (response.data.Error) {
+            return [];
+        }
+        return response.data.Search;
     }
 });
 
