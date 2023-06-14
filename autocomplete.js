@@ -42,7 +42,7 @@ const createAutoComplete = ({ root,
          movieOption.addEventListener("click", () => {
             dropdown.classList.remove("is-active"); 
             input.value = inputValue(data);
-            onOptionSelect(data);
+            onOptionSelect(data); 
          })
          resultsWrapper.appendChild(movieOption);
       });

@@ -49,18 +49,14 @@ figure .image img {
    margin-right: 10px;
 }
 
-h1,
-h4 {
-   font-weight: 900 !important;
-   margin: 0em 0em 0.4em 0em !important;
-}
-
 h1 {
    font-size: 150% !important;
+   font-weight: 900 !important;
 }
 
 h4 {
    font-size: 120% !important;
+   font-weight: 900 !important;
 }
 
 #summary {
