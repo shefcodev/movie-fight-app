@@ -59,6 +59,6 @@ h4 {
    font-weight: 900 !important;
 }
 
-#summary {
+#left-summary, #right-summary {
    margin-top: 0.7em;
 }
