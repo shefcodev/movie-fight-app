@@ -95,7 +95,7 @@ const movieTemplate = movieDetail => {
    const awards = movieDetail.Awards.split(" ").filter(wrd => Number(wrd))
    .reduce((total, value) => {
       return parseInt(total) + parseInt(value);
-   });
+   }); 
 
    return `
       <article class = "media">
